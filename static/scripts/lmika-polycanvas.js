@@ -206,24 +206,28 @@ class LmikaPolycanvas extends HTMLElement {
         this.replaceChild(newCanvas, img);        
         this._canvas = newCanvas;
         
-        window.setTimeout(() => {
-            // Setting up a resize observer
-            if (!!window.ResizeObserver) {
-                const resizeObserver = new ResizeObserver((entries) => {
-                    for (let entry of entries) {
-                        let r = entry.target.getBoundingClientRect();
-                        entry.target.width = r.width;
-                        entry.target.height = r.width * 1.5;
-                    }
-                });
-                resizeObserver.observe(this._canvas);
-            }
-            
-            let r = this._canvas.getBoundingClientRect();
+        
+        // Resize canvas and setup a resize observer
+        if (!!window.ResizeObserver) {
+            const resizeObserver = new ResizeObserver((entries) => {
+                this._fixCanvasSizeAndRefresh();
+            });
+            resizeObserver.observe(this._canvas);
+        }        
+        this._fixCanvasSizeAndRefresh();
+    }
+    
+    _fixCanvasSizeAndRefresh() {
+        let r = this._canvas.getBoundingClientRect();
+        if (this._canvas.width == r.width) {
+            return;
+        }
+        
+        window.requestAnimationFrame(() => {
             this._canvas.width = r.width;
             this._canvas.height = r.width * 1.5;
-            this._refreshCanvas();
-        }, 0);
+            this._refreshCanvas();        
+        });
     }
     
     attributeChangedCallback(name, oldValue, newValue) {
