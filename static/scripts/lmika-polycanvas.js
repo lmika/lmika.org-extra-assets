@@ -205,13 +205,14 @@ class LmikaPolycanvas extends HTMLElement {
             this._canvasClick(ev);
         })
         
-        this.replaceChild(newCanvas, img);
-        
-        newCanvas.width = newCanvas.outerWidth;
-        newCanvas.height = newCanvas.outerHeight;
-        
+        this.replaceChild(newCanvas, img);        
         this._canvas = newCanvas;
-        this._refreshCanvas();
+        
+        window.setTimeout(() => {
+            this._canvas.width = this._canvas.outerWidth;
+            this._canvas.height = this._canvas.outerHeight;
+            this._refreshCanvas();
+        }, 0);
     }
     
     attributeChangedCallback(name, oldValue, newValue) {
