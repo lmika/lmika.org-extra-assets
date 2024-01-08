@@ -196,8 +196,11 @@ class LmikaPolycanvas extends HTMLElement {
         let img = this.querySelector("img");
         
         let newCanvas = document.createElement("canvas");
-        newCanvas.setAttribute("width", LmikaPolycanvas.canvasWidth);
-        newCanvas.setAttribute("height", LmikaPolycanvas.canvasHeight);
+        var heightRatio = 1.5;
+        newCanvas.height = newCanvas.width * heightRatio;
+        
+        // newCanvas.setAttribute("width", LmikaPolycanvas.canvasWidth);
+        // newCanvas.setAttribute("height", LmikaPolycanvas.canvasHeight);
         newCanvas.addEventListener("click", (ev) => {
             this._canvasClick(ev);
         })
