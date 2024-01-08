@@ -207,8 +207,8 @@ class LmikaPolycanvas extends HTMLElement {
         
         this.replaceChild(newCanvas, img);
         
-        newCanvas.width = this._canvas.outerWidth;
-        newCanvas.height = this._canvas.outerHeight;
+        newCanvas.width = newCanvas.outerWidth;
+        newCanvas.height = newCanvas.outerHeight;
         
         this._canvas = newCanvas;
         this._refreshCanvas();
