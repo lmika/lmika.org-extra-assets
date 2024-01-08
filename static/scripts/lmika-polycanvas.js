@@ -210,10 +210,14 @@ class LmikaPolycanvas extends HTMLElement {
             // Setting up a resize observer
             if (!!window.ResizeObserver) {
                 const resizeObserver = new ResizeObserver((entries) => {
-                    let r = this._canvas.getBoundingClientRect();
-                    this._canvas.width = r.width;
-                    this._canvas.height = r.width * 1.5;
-                    this._refreshCanvas();                
+                    for (let entry in entries) {
+                        if (entry.target == this._canvas) {
+                            let r = this._canvas.getBoundingClientRect();
+                            this._canvas.width = r.width;
+                            this._canvas.height = r.width * 1.5;
+                            this._refreshCanvas();                                 
+                        }
+                    }
                 });
                 resizeObserver.observe(this._canvas);
             }
