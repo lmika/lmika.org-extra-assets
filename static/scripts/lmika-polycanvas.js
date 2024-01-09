@@ -58,7 +58,7 @@ function definePolygon(cx, cy, r, sides) {
     let vectors = [];
     
     let px = 0, py = 0;
-    for (theta = 360; theta >= 0; theta -= 360 / sides) {
+    for (let theta = 360; theta >= 0; theta -= 360 / sides) {
         console.log(theta);
         
         let qy = cy + r * Math.cos(theta * Math.PI / 180);
@@ -142,7 +142,7 @@ class World {
             w.showArcWithLine = true;
             w.printArcAngle = true;
             w.arcMonoColour = true;
-            w.mouseX = gx * 11;
+            w.mouseX = gx * 10;
             w.mouseY = gy * 5;
             
             return w;
@@ -167,7 +167,7 @@ class World {
         "5": (cw, ch) => {
             let gx = cw / 8, gy = ch / 8;
             
-            return new World(definePolygon(gx * 4, gy * 4, gx * 2, 6), {
+            return new World(definePolygon(gx * 4, gy * 4, gx * 1.5, 6), {
                 showSmallNormals: true,
                 trackMouse: true,
                 mouseX: gx * 4,
@@ -219,15 +219,20 @@ class LmikaPolycanvas extends HTMLElement {
     
     _fixCanvasSizeAndRefresh() {
         let r = this._canvas.getBoundingClientRect();
-        if (this._canvas.width == r.width) {
-            return;
-        }
         
         window.requestAnimationFrame(() => {
             this._canvas.width = r.width;
-            this._canvas.height = r.width * 1.5;
+            this._canvas.height = Math.max(450, r.width * 4.5/7.0);
             this._refreshCanvas();        
         });
+    }
+
+    _canvasDims() {
+        let r = this._canvas.getBoundingClientRect();
+        let w = r.width;
+        let h = Math.max(450, r.width * 4.5/7.0);
+
+        return { w: w, h: h };
     }
     
     attributeChangedCallback(name, oldValue, newValue) {
@@ -251,25 +256,34 @@ class LmikaPolycanvas extends HTMLElement {
             return;
         }
         
-        let ctx = this._canvas.getContext("2d");                
-        ctx.clearRect(0, 0, LmikaPolycanvas.canvasWidth, LmikaPolycanvas.canvasHeight);
+        let ctx = this._canvas.getContext("2d");
+        ctx.resetTransform();
 
+        let r = this._canvas.getBoundingClientRect();
+
+        ctx.fillStyle = "#FFF";
+        ctx.clearRect(0, 0, r.width, r.height);
 
         // Draw a grid
-        ctx.lineWidth = 0.5;
-        ctx.strokeStyle = "#AAA";
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = "#BBB";
         ctx.setLineDash([5, 10]);
+
+        let dims = this._canvasDims();
+
+        // Translate based on the viewport
+        ctx.translate(-(720 - dims.w) / 2.0, 0);
         
-        for (let x = 50; x <= LmikaPolycanvas.canvasWidth - 50; x += 50) {
+        for (let x = 50; x <= r.width + 750; x += 50) {
             ctx.beginPath();
             ctx.moveTo(x + 0.5, 0);
-            ctx.lineTo(x + 0.5, LmikaPolycanvas.canvasHeight);
+            ctx.lineTo(x + 0.5, r.height + 750);
             ctx.stroke();        
         }
-        for (let y = 50; y <= LmikaPolycanvas.canvasHeight - 50; y += 50) {            
+        for (let y = 50; y <= r.height + 750; y += 50) {            
             ctx.beginPath();
             ctx.moveTo(0, y + 0.5);
-            ctx.lineTo(LmikaPolycanvas.canvasWidth, y + 0.5);
+            ctx.lineTo(r.width + 750, y + 0.5);
             ctx.stroke();        
         }            
         
@@ -279,7 +293,8 @@ class LmikaPolycanvas extends HTMLElement {
         
         ctx.font = "18px sans-serif";
         ctx.lineCap = "butt";
-            
+        
+         var arcMessage;
         for (let testVector of this._world.vectors) {
             // Draw the vector
             ctx.lineWidth = 3;
@@ -327,19 +342,33 @@ class LmikaPolycanvas extends HTMLElement {
             }
             this._drawVector(ctx, mouseVector, true, 10);
             
-            // Draw arc
+            // Draw arc            
             if (this._world.showArcWithLine) {
-                this._drawArc(ctx, testVector, mouseVector);
+                arcMessage = this._drawArc(ctx, testVector, mouseVector);
             } else if (this._world.showArcWithNormal) {
-                this._drawArc(ctx, testVectorNormal.atOrigin(testVector.ox, testVector.oy), mouseVector);
+                arcMessage = this._drawArc(ctx, testVectorNormal.atOrigin(testVector.ox, testVector.oy), mouseVector);
+            } else {
+                arcMessage = null;
             }
         
             inPolygon = inPolygon & (dp > 0);
         }
+
+        ctx.resetTransform();
+
+        ctx.fillStyle = "#000";
         
         if (this._world.showInPolygon) {
             ctx.fillText(`In polygon? ${inPolygon ? 'yes 👍' : 'no 😞'}`, 8, 20);
+        } else if (arcMessage) {
+            ctx.fillText(arcMessage, 8, 20);
         }
+
+        // Draw a border
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = "#AAA";
+        ctx.setLineDash([]);
+        ctx.strokeRect(0.5, 0.5, this._canvas.width - 0.5, this._canvas.height - 0.5); 
     }
     
     _drawVector(ctx, vec, drawCrossHair, arrowheadSize) {
@@ -399,16 +428,21 @@ class LmikaPolycanvas extends HTMLElement {
         ctx.arc(vec1.ox, vec1.oy, 20, -theta2, -theta1, dp > 0);
         ctx.stroke();
         
+        let arcMessage;
         if (this._world.printArcAngle) {
             let angleDeg = Math.abs(this._normalizedAngle(theta2 - theta1)) * 180 / Math.PI;            
             let angleDegInt = (angleDeg)|0;
             
             if (this._world.printDP) {
-                ctx.fillText(`Angle = ${angleDegInt}°, Dot Product = ${vec2.dotProduct(vec1)}`, 8, 20);
+                arcMessage = `Angle = ${angleDegInt}°, Dot Product = ${vec2.dotProduct(vec1)|0}`;
             } else {
-                ctx.fillText(`Angle = ${angleDegInt}°`, 8, 20);
+                arcMessage = `Angle = ${angleDegInt}°`;
             }
+        } else {
+            arcMessage = null;
         }
+
+        return arcMessage;
     }
     
     _normalizedAngle(ang) {
@@ -429,8 +463,10 @@ class LmikaPolycanvas extends HTMLElement {
             return;
         }
         ev.preventDefault();
-        
-        this._world.mouseX = event.offsetX;
+
+        let dims = this._canvasDims();
+
+        this._world.mouseX = event.offsetX + (720 - dims.w) / 2.0;
         this._world.mouseY = event.offsetY;
         this._refreshCanvas();
     }
