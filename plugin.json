@@ -1,5 +1,8 @@
 {
     "version": "0.0.1",
     "title": "Assets for lmika.org",
-    "description": "Extra scripts and styles for lmika.org"
+    "description": "Extra scripts and styles for lmika.org",
+    "includes": [
+        "/styles/dialogue.css"
+    ]
 }

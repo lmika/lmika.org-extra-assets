@@ -1,0 +1,100 @@
+:root {
+    --dialogue-m1-color: transparent;
+    --dialogue-m2-color: transparent;
+    --dialogue-m1-background: none;
+    --dialogue-m2-background: none;
+}
+
+blockquote.dialogue {
+    background: none;
+    border: solid 3px black;
+    border-radius: 8px;
+
+    font-size: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 550px;
+
+    margin-inline: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+    blockquote.dialogue {
+        background: rgba(255,255,255,0.1);
+        border-color: white;
+    }
+}
+
+blockquote.dialogue header {
+    text-align: center;
+    width: 100%;
+    font-size: 1.3rem;
+    margin-bottom: 0.75em;
+}
+
+/* Message bubble */
+blockquote.dialogue .member {
+    color: white;
+    padding: 6px 10px;
+    border-radius: 8px;
+    margin: 0.4em;
+    max-width: calc(100% - 100px);
+    position: relative;
+}
+
+blockquote.dialogue .member a,
+blockquote.dialogue .member em {
+    color: white;
+}
+
+/* Message bubble on right */
+blockquote.dialogue .member.member-m1 {
+    align-self: flex-end;
+    margin-right: 60px;
+    background: var(--dialogue-m1-color);
+}
+
+/* Message bubble on left */
+blockquote.dialogue .member.member-m2 {
+    margin-left: 60px;
+    background: var(--dialogue-m2-color);
+}
+
+/* Avatars */
+blockquote.dialogue .member b.avatar {
+    font-size: 0;
+    text-align: center;
+
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+
+    top: -0.4rem;
+    position: absolute;
+    z-index: 10;
+
+    border-radius: 50%;
+}
+
+/* Avatar 1 is on right */
+blockquote.dialogue .member.member-m1 b.avatar {
+    right: -60px;
+    border: solid 2px var(--dialogue-m1-color);
+    background: var(--dialogue-m1-background);
+}
+
+/* Avatar 2 is on left */
+blockquote.dialogue .member.member-m2 b.avatar {
+    left: -60px;
+    border: solid 2px var(--dialogue-m2-color);
+    background: var(--dialogue-m2-background);
+}
+
+/* Hide consecutive avatars */
+.member.member-m1 + .member.member-m1 b.avatar,
+.member.member-m2 + .member.member-m2 b.avatar {
+    background: none;
+    border: none;
+}
