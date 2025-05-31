@@ -6,16 +6,14 @@
 }
 
 blockquote.dialogue {
-    background: none;
-    border: solid 3px black;
-    border-radius: 8px;
+    background: color-mix(in hsl, var(--background), var(--aside) 40%);
+    border: none;
 
     font-size: 1rem;
-
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    max-width: 550px;
+    max-width: 600px;
 
     margin-inline: auto;
 }
@@ -90,6 +88,12 @@ blockquote.dialogue .member.member-m2 b.avatar {
     left: -60px;
     border: solid 2px var(--dialogue-m2-color);
     background: var(--dialogue-m2-background);
+}
+
+/* Narrow the margin between consecutive messages */
+.member.member-m1 + .member.member-m1,
+.member.member-m2 + .member.member-m2 {
+    margin-block-start: -0.2em;
 }
 
 /* Hide consecutive avatars */
