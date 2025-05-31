@@ -8,7 +8,7 @@
 }
 
 
-@media (prefers-color-scheme: dark) {
+@media (max-width: 480px) {
     :root {
         --dialogue-margin-block: 0.8em;
     }
@@ -97,7 +97,7 @@ blockquote.dialogue .member.member-m2 b.avatar {
 /* Narrow the margin between consecutive messages */
 .member.member-m1 + .member.member-m1,
 .member.member-m2 + .member.member-m2 {
-    margin-block-start: calc(var(--dialogue-margin-block) / 2);
+    margin-block-start: calc(var(--dialogue-margin-block) / -2);
 }
 
 /* Hide consecutive avatars */
