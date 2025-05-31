@@ -4,14 +4,14 @@
     --dialogue-m1-background: none;
     --dialogue-m2-background: none;
     
-    --dialogue-margin-block: 0.4em;
+    --dialogue-margin-block: 0.8em;
     --dialogue-speech-bubble-sub-max-width: 200px;
 }
 
 
 @media (max-width: 480px) {
     :root {
-        --dialogue-margin-block: 0.8em;
+        --dialogue-margin-block: 1em;
         --dialogue-speech-bubble-sub-max-width: 100px;
     }
 }
