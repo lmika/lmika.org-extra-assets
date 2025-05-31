@@ -6,8 +6,9 @@
 }
 
 blockquote.dialogue {
-    background: color-mix(in hsl, var(--background), var(--aside) 40%);
+    background: color-mix(in hsl, var(--background), var(--link) 10%);
     border: none;
+    border-radius: 5px;
 
     font-size: 1rem;
     display: flex;
@@ -16,13 +17,6 @@ blockquote.dialogue {
     max-width: 600px;
 
     margin-inline: auto;
-}
-
-@media (prefers-color-scheme: dark) {
-    blockquote.dialogue {
-        background: rgba(255,255,255,0.1);
-        border-color: white;
-    }
 }
 
 blockquote.dialogue header {
