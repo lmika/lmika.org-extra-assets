@@ -17,7 +17,7 @@
 }
 
 blockquote.dialogue {
-    background: color-mix(in hsl, var(--background), var(--link) 10%);
+    background: color-mix(in hsl, var(--background), var(--link) 8%);
     border: none;
     border-radius: 5px;
 
