@@ -3,6 +3,15 @@
     --dialogue-m2-color: transparent;
     --dialogue-m1-background: none;
     --dialogue-m2-background: none;
+    
+    --dialogue-margin-block: 0.4em;
+}
+
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --dialogue-margin-block: 0.8em;
+    }
 }
 
 blockquote.dialogue {
@@ -31,7 +40,8 @@ blockquote.dialogue .member {
     color: white;
     padding: 6px 10px;
     border-radius: 8px;
-    margin: 0.4em;
+    margin-block: var(--dialogue-margin-block);
+    margin-inline: 0.4em;
     max-width: calc(100% - 100px);
     position: relative;
 }
@@ -87,7 +97,7 @@ blockquote.dialogue .member.member-m2 b.avatar {
 /* Narrow the margin between consecutive messages */
 .member.member-m1 + .member.member-m1,
 .member.member-m2 + .member.member-m2 {
-    margin-block-start: -0.2em;
+    margin-block-start: calc(var(--dialogue-margin-block) / 2);
 }
 
 /* Hide consecutive avatars */
