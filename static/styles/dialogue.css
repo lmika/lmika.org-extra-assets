@@ -16,7 +16,7 @@
     }
 }
 
-blockquote.dialogue {
+.dialogue {
     background: color-mix(in hsl, var(--background), var(--link) 8%);
     border: none;
     border-radius: 5px;
@@ -30,7 +30,7 @@ blockquote.dialogue {
     margin-inline: auto;
 }
 
-blockquote.dialogue header {
+.dialogue header {
     text-align: center;
     width: 100%;
     font-size: 1.3rem;
@@ -38,7 +38,7 @@ blockquote.dialogue header {
 }
 
 /* Message bubble */
-blockquote.dialogue .member {
+.dialogue .member {
     color: white;
     padding: 6px 10px;
     border-radius: 8px;
@@ -48,26 +48,26 @@ blockquote.dialogue .member {
     position: relative;
 }
 
-blockquote.dialogue .member a,
-blockquote.dialogue .member em {
+.dialogue .member a,
+.dialogue .member em {
     color: white;
 }
 
 /* Message bubble on right */
-blockquote.dialogue .member.member-m1 {
+.dialogue .member.member-m1 {
     align-self: flex-end;
     margin-right: 60px;
     background: var(--dialogue-m1-color);
 }
 
 /* Message bubble on left */
-blockquote.dialogue .member.member-m2 {
+.dialogue .member.member-m2 {
     margin-left: 60px;
     background: var(--dialogue-m2-color);
 }
 
 /* Avatars */
-blockquote.dialogue .member b.avatar {
+.dialogue .member b.avatar {
     font-size: 0;
     text-align: center;
 
@@ -83,14 +83,14 @@ blockquote.dialogue .member b.avatar {
 }
 
 /* Avatar 1 is on right */
-blockquote.dialogue .member.member-m1 b.avatar {
+.dialogue .member.member-m1 b.avatar {
     right: -60px;
     border: solid 2px var(--dialogue-m1-color);
     background: var(--dialogue-m1-background);
 }
 
 /* Avatar 2 is on left */
-blockquote.dialogue .member.member-m2 b.avatar {
+.dialogue .member.member-m2 b.avatar {
     left: -60px;
     border: solid 2px var(--dialogue-m2-color);
     background: var(--dialogue-m2-background);
