@@ -17,7 +17,7 @@
 }
 
 .dialogue {
-    background: color-mix(in hsl, var(--background), var(--link) 8%);
+    background: color-mix(in hsl, var(--background), black 8%);
     border: none;
     border-radius: 5px;
 
@@ -28,6 +28,14 @@
     max-width: 600px;
 
     margin-inline: auto;
+    padding: 1rem;
+    margin-block: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .dialogue {
+        background: color-mix(in hsl, var(--background), white 8%);
+    }
 }
 
 .dialogue header {
