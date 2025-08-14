@@ -1,8 +1,12 @@
 :root {
     --dialogue-m1-color: transparent;
     --dialogue-m2-color: transparent;
+    --dialogue-m3-color: transparent;
+    --dialogue-m4-color: transparent;
     --dialogue-m1-background: none;
     --dialogue-m2-background: none;
+    --dialogue-m3-background: none;
+    --dialogue-m4-background: none;
     
     --dialogue-margin-block: 0.8em;
     --dialogue-speech-bubble-sub-max-width: 200px;
@@ -74,6 +78,16 @@
     background: var(--dialogue-m2-color);
 }
 
+.dialogue .member.member-m3 {
+    margin-left: 60px;
+    background: var(--dialogue-m3-color);
+}
+
+.dialogue .member.member-m4 {
+    margin-left: 60px;
+    background: var(--dialogue-m4-color);
+}
+
 /* Avatars */
 .dialogue .member b.avatar {
     font-size: 0;
@@ -104,15 +118,31 @@
     background: var(--dialogue-m2-background);
 }
 
+.dialogue .member.member-m3 b.avatar {
+    left: -60px;
+    border: solid 2px var(--dialogue-m3-color);
+    background: var(--dialogue-m3-background);
+}
+
+.dialogue .member.member-m4 b.avatar {
+    left: -60px;
+    border: solid 2px var(--dialogue-m4-color);
+    background: var(--dialogue-m4-background);
+}
+
 /* Narrow the margin between consecutive messages */
 .member.member-m1 + .member.member-m1,
-.member.member-m2 + .member.member-m2 {
+.member.member-m2 + .member.member-m2,
+.member.member-m3 + .member.member-m3,
+.member.member-m4 + .member.member-m4 {
     margin-block-start: calc(var(--dialogue-margin-block) / -2);
 }
 
 /* Hide consecutive avatars */
 .member.member-m1 + .member.member-m1 b.avatar,
-.member.member-m2 + .member.member-m2 b.avatar {
+.member.member-m2 + .member.member-m2 b.avatar,
+.member.member-m3 + .member.member-m3 b.avatar,
+.member.member-m4 + .member.member-m4 b.avatar {
     background: none;
     border: none;
 }
