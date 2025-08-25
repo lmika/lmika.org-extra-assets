@@ -58,6 +58,7 @@
     margin-inline: 0.4em;
     max-width: calc(100% - var(--dialogue-speech-bubble-sub-max-width));
     position: relative;
+    font-style: normal;
 }
 
 .dialogue .member a,
