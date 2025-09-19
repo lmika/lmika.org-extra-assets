@@ -1,8 +1,4 @@
-<ul class="postlist">
-{{ range . }}
-<li>
-  <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-  {{- if (ne .Summary "") -}}: {{ .Summary | safeHTML }}{{- end -}}
-</li>
-{{ end }}
+<div class="h=entry">
+  <a class="p-name" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+  {{- if (ne .Summary "") -}}: <span class="p-summary">{{ .Summary | safeHTML }}{{- end -}}</span>
 </ul>
