@@ -2,7 +2,7 @@
 {{ range . }}
 <li>
   <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-  {{- if (ne .Summary "") -}}: {{ .Summary | safeHTML }}</a>
+  {{- if (ne .Summary "") -}}: {{ .Summary | safeHTML }}{{- end -}}
 </li>
 {{ end }}
 </ul>
