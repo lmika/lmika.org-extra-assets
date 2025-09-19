@@ -1,5 +1,5 @@
 <ul class="postlist">
-{{ range $pgr }}
+{{ range . }}
 <li>
   <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
   {{- if (ne .Summary "") -}}: {{ .Summary | safeHTML }}</a>
