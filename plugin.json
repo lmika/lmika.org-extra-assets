@@ -3,6 +3,7 @@
     "title": "Assets for lmika.org",
     "description": "Extra scripts and styles for lmika.org",
     "includes": [
-        "/styles/dialogue.css"
+        "/styles/mythos-custom.css",
+        "/styles/dialogue.css",
     ]
 }
