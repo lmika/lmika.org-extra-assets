@@ -5,9 +5,8 @@ figure.marginalia {
   float: right;
   margin: 0;
   margin-inline-start: 20px;
-  display: none;
 }
 
-hidden {
+.hidden {
   display: none !important;
 }
