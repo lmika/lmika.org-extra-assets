@@ -4,7 +4,7 @@
     "description": "Extra scripts and styles for lmika.org",
     "includes": [
         "/marginalia.js",
-        "/custom.css",
+        "/extra.css",
         "/dialogue.css"
     ]
 }
