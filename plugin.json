@@ -3,8 +3,8 @@
     "title": "Assets for lmika.org",
     "description": "Extra scripts and styles for lmika.org",
     "includes": [
-        "/scripts/marginalia.js",
-        "/styles/custom.css",
-        "/styles/dialogue.css",
+        "/marginalia.js",
+        "/custom.css",
+        "/dialogue.css"
     ]
 }
