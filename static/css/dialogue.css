@@ -9,38 +9,38 @@
     --dialogue-m4-background: none;
     
     --dialogue-margin-block: 0.8em;
-    --dialogue-speech-bubble-sub-max-width: 200px;
+    --dialogue-speech-bubble-sub-max-width: 80px;
 }
 
 
 @media (max-width: 480px) {
     :root {
         --dialogue-margin-block: 1em;
-        --dialogue-speech-bubble-sub-max-width: 100px;
+        --dialogue-speech-bubble-sub-max-width: 80px;
     }
 }
 
 .dialogue {
-    background: color-mix(in hsl, var(--background), black 8%);
+/*    background: color-mix(in hsl, var(--background), black 8%); */
     border: none;
     border-radius: 5px;
 
-    font-size: 1rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    max-width: 600px;
 
-    margin-inline: auto;
-    padding: 1rem;
+    margin-inline: 0;
+    padding: 1.1rem;
     margin-block: 1rem;
 }
 
+/*
 @media (prefers-color-scheme: dark) {
     .dialogue {
         background: color-mix(in hsl, var(--background), white 8%);
     }
 }
+*/
 
 .dialogue header {
     text-align: center;
@@ -51,11 +51,9 @@
 
 /* Message bubble */
 .dialogue .member {
-    color: white;
-    padding: 6px 10px;
+    padding: 4px 0px;
     border-radius: 8px;
     margin-block: var(--dialogue-margin-block);
-    margin-inline: 0.4em;
     max-width: calc(100% - var(--dialogue-speech-bubble-sub-max-width));
     position: relative;
     font-style: normal;
@@ -70,23 +68,38 @@
 .dialogue .member.member-m1 {
     align-self: flex-end;
     margin-right: 60px;
-    background: var(--dialogue-m1-color);
+    color: color-mix(in hsl, var(--dialogue-m1-color), black 40%);
 }
 
 /* Message bubble on left */
 .dialogue .member.member-m2 {
     margin-left: 60px;
-    background: var(--dialogue-m2-color);
+    color: color-mix(in hsl, var(--dialogue-m2-color), black 40%);
 }
 
 .dialogue .member.member-m3 {
     margin-left: 60px;
-    background: var(--dialogue-m3-color);
+    color: color-mix(in hsl, var(--dialogue-m3-color), black 40%);
 }
 
 .dialogue .member.member-m4 {
     margin-left: 60px;
-    background: var(--dialogue-m4-color);
+    color: color-mix(in hsl, var(--dialogue-m4-color), black 40%);
+}
+
+@media (prefers-color-scheme: dark) {
+    .dialogue .member.member-m1 {
+        color: color-mix(in hsl, var(--dialogue-m1-color), white 40%);
+    }
+    .dialogue .member.member-m2 {
+        color: color-mix(in hsl, var(--dialogue-m2-color), white 40%);
+    }
+    .dialogue .member.member-m3 {
+        color: color-mix(in hsl, var(--dialogue-m3-color), white 40%);
+    }
+    .dialogue .member.member-m4 {
+        color: color-mix(in hsl, var(--dialogue-m4-color), white 40%);
+    }
 }
 
 /* Avatars */
@@ -94,9 +107,9 @@
     font-size: 0;
     text-align: center;
 
-    width: 48px;
-    height: 48px;
-    line-height: 48px;
+    width: 42px;
+    height: 42px;
+    line-height: 42px;
 
     top: -0.4rem;
     position: absolute;
